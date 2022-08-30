@@ -8,20 +8,27 @@
 // Syntax ví dụ interface List<T> {} , Array<number>
 //
 
+// Children
+/**
+ * Là nội dung nằm giữa thẻ đóng , thẻ mở
+ *
+ */
+
 import { Student } from 'models';
 import * as React from 'react';
 
 export interface StudentCardProps {
   student: Student;
+  onClick?: (student: Student) => void;
 }
 
-export function StudentCard({ student }: StudentCardProps) {
+export function StudentCard({ student, onClick }: StudentCardProps) {
   if (!student) return null;
 
   const { name, id, gender, address, isGraduate } = student;
 
   return (
-    <div>
+    <div onClick={() => onClick?.(student)}>
       {`ID:${id} , Name:${name} , ${gender ? `Gender: ${gender}` : ''} , ${
         address ? `Address:${address}` : ''
       } , ${isGraduate ? `is graduated` : 'not graduated'}`}
